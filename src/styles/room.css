@@ -1,0 +1,18 @@
+.tables
+{
+    background-color: #5F82BF;
+    height: 60%;
+    text-align: center;
+}
+
+.tables, p{
+    padding: 60;
+    color: #34252F;
+    white-space: nowrap;
+}
+
+.page_container
+{
+    background-color: #002925;
+    height: 100%;
+}
