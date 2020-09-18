@@ -47,7 +47,8 @@ function connectToRoom(room_name, token)
   console.log("attempting to join " + room_name)
         if(token!=="")
         {
-            Video.connect(token, { name: room_name }).then(room => {
+          var connection_options = {name: room_name, _useTwilioConnection: true}
+            Video.connect(token, connection_options).then(room => {
                 console.log('Connected to Room "%s"', room.name);
                 console.log(room);
               
