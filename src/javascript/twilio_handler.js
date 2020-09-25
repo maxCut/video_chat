@@ -1,15 +1,30 @@
 const Video = Twilio.Video;
 var key = "";
 
-let getApiToken = new Promise(function(resolve, reject) {
+function getApiToken(user_name)
+{
+return new Promise(function(resolve, reject) {
   setTimeout(() => reject(new Error("Whoops!")), 1000);
-  $.get('/key_request',function(data,status)
+  $.get('/key_request?identity='+user_name,function(data,status)
   {
       resolve(data);
   });
-});
-    
-function participantConnected(participant) {
+})
+}   
+function participantConnected(participant,room) {
+	
+
+
+
+	/*
+  // Add a container for the Participant's media.
+  const container = $(`<div class="participant" data-identity="${identity}" id="${sid}">
+    <audio autoplay ${participant === room.localParticipant ? 'muted' : ''} style="opacity: 0"></audio>
+    <video autoplay muted playsinline style="opacity: 0"></video>
+  </div>`);
+  */
+
+
   console.log('Participant "%s" connected', participant.identity);
 
   const div = document.createElement('div');
@@ -25,7 +40,7 @@ function participantConnected(participant) {
     }
   });
 
-  document.body.appendChild(div);
+  document.getElementById("participants").appendChild(div);
 }
 
 function participantDisconnected(participant) {
@@ -34,6 +49,7 @@ function participantDisconnected(participant) {
 }
 
 function trackSubscribed(div, track) {
+	console.log("track sub");
     div.appendChild(track.attach());
   }
   
@@ -52,8 +68,8 @@ function connectToRoom(room_name, token)
                 console.log('Connected to Room "%s"', room.name);
                 console.log(room);
               
-                room.participants.forEach(participantConnected);
-                room.on('participantConnected', participantConnected);
+		room.participants.forEach(participantConnected);
+		room.on('participantConnected', participant => {participantConnected(participant,room)})
               
                 room.on('participantDisconnected', participantDisconnected);
                 room.once('disconnected', error => room.participants.forEach(participantDisconnected));

@@ -22,8 +22,8 @@ app.get('/', function(req, res) {
 app.get('/key_request', function(req,res){
 
 
+const { identity } = req.query;
 
-  const identity = 'user';
 
 // Create Video Grant
 const videoGrant = new VideoGrant();
@@ -33,9 +33,10 @@ const videoGrant = new VideoGrant();
 const token = new AccessToken(
   twilioAccountSid,
   twilioApiKey,
-  twilioApiSecret,
-  {identity: identity}
+  twilioApiSecret
 );
+
+  token.identity = identity;
 token.addGrant(videoGrant);
   res.send(token.toJwt());
 });
