@@ -1,11 +1,24 @@
 const Video = Twilio.Video;
+const Chat = Twilio.Chat;
 var key = "";
 
-function getApiToken(user_name)
+function getTableApiToken(user_name)
 {
 return new Promise(function(resolve, reject) {
   setTimeout(() => reject(new Error("Whoops!")), 1000);
-  $.get('/key_request?identity='+user_name,function(data,status)
+  $.get('/table_key_request?identity='+user_name,function(data,status)
+  {
+      resolve(data);
+  });
+})
+}   
+
+
+function getRoomApiToken(user_name)
+{
+return new Promise(function(resolve, reject) {
+  setTimeout(() => reject(new Error("Whoops!")), 1000);
+  $.get('/room_key_request?identity='+user_name,function(data,status)
   {
       resolve(data);
   });
@@ -58,12 +71,12 @@ function trackSubscribed(div, track) {
   }
 
   
-function connectToRoom(room_name, token)
+function connectToTable(table_name, token)
 {
-  console.log("attempting to join " + room_name)
+  console.log("attempting to join " + table_name)
         if(token!=="")
         {
-          var connection_options = {name: room_name, _useTwilioConnection: true}
+          var connection_options = {name: table_name, _useTwilioConnection: true}
             Video.connect(token, connection_options).then(room => {
                 console.log('Connected to Room "%s"', room.name);
                 console.log(room);
@@ -75,4 +88,20 @@ function connectToRoom(room_name, token)
                 room.once('disconnected', error => room.participants.forEach(participantDisconnected));
               });
         }
+}
+
+function connectToRoom(room_name,token)
+{
+
+  Chat.Client.create(token).then(client => {
+    client.createChannel({
+      uniqueName: room_name,
+      friendlyName: room_name,
+    })
+    .then(function(channel) {
+      console.log('created channel:');
+      console.log(channel);
+    });
+
+  })
 }

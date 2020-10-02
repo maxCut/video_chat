@@ -19,7 +19,30 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/src/index.html'));
 });
 
-app.get('/key_request', function(req,res){
+app.get('/room_key_request', function(req,res){
+
+  const { identity } = req.query;
+  
+  
+const chatGrant = new ChatGrant({
+  serviceSid: serviceSid,
+});
+
+// Create an access token which we will sign and return to the client,
+// containing the grant we just created
+const token = new AccessToken(
+  twilioAccountSid,
+  twilioApiKey,
+  twilioApiSecret
+);
+
+    token.identity = identity;
+  token.addGrant(chatGrant);
+    res.send(token.toJwt());
+});
+
+
+app.get('/table_key_request', function(req,res){
 
 
 const { identity } = req.query;
