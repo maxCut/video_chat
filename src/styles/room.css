@@ -1,18 +1,19 @@
-.tables
-{
-    background-color: #5F82BF;
-    height: 60%;
+
+.btn-circle {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
     text-align: center;
-}
-
-.tables, p{
-    padding: 60;
-    color: #34252F;
-    white-space: nowrap;
-}
-
+    padding: 0;
+    border-radius: 50%;
+  }
+  .title
+  {
+      padding-top: 5%;
+      text-align: center;
+  }
+  
 .page_container
 {
-    background-color: #002925;
-    height: 100%;
+    text-align: center;
 }

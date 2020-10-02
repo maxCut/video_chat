@@ -1,0 +1,24 @@
+#page
+{
+    background-color: #DDDDDD;
+  box-shadow: 0 50vh 0 50vh #DDDDDD;
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
+header
+{
+    height: 60px;
+    background-color: #002925;
+}
+footer
+{
+    background-color: #002925;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
