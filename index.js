@@ -5,11 +5,13 @@ const port = 3000
 
 const AccessToken = require('twilio').jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
+const ChatGrant = AccessToken.ChatGrant;
 
 // Used when generating any kind of tokens
 const twilioAccountSid = 'AC103588916d08b9990e1cc0c54b7c4390';
 const twilioApiKey = 'SK6ee93af114d26ad34adbaf3ea4df910b';
 const twilioApiSecret = 'o9mGQyv8pgX6nbNWeB5DIHE8WhJJfwCG';
+const serviceSid = 'IS44d90fe6773b46ab8fb07ae515f6d72e';
 
 app.use(express.static(__dirname + '/src/javascript'));
 app.use(express.static(__dirname + '/src/html'));
@@ -65,5 +67,5 @@ token.addGrant(videoGrant);
 });
 
 app.listen(port, () => {
-  console.log(`istening at http://localhost:${port}`)
+  console.log(`listening at http://localhost:${port}`)
 })

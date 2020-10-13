@@ -1,6 +1,7 @@
 const Video = Twilio.Video;
 const Chat = Twilio.Chat;
 var key = "";
+var connected_channel;
 
 function getTableApiToken(user_name)
 {
@@ -89,10 +90,13 @@ function connectToTable(table_name, token)
               });
         }
 }
+function sendMessage(msg)
+{
+  connected_channel.sendMessage(msg);
+}
 
 function connectToRoom(room_name,token)
 {
-
   Chat.Client.create(token).then(client => {
     client.createChannel({
       uniqueName: room_name,
@@ -101,7 +105,8 @@ function connectToRoom(room_name,token)
     .then(function(channel) {
       console.log('created channel:');
       console.log(channel);
+      connected_channel = channel;
+      channel.on('messageAdded',function(mesg){console.log(mesg)})
     });
-
   })
 }

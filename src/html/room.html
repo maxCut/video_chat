@@ -1,13 +1,15 @@
 <html>
 	<script src = "/room.js"></script>
+	<script src = "/table.js"></script>
     <link rel="stylesheet" href="/room.css">
     <div class ="page_container">
-        <div>          
+        <div>       
+            <div id = "table_view"></div>   
             <h1>Tables</h1>
             <div class="tables">
 
             </div>
-            <button class="rounded btn btn-primary btn-circle m-1">+</button>
+            <button class="rounded btn btn-primary btn-circle m-1" onclick="new_table()">+</button>
         </div>
         <div class = "self_view">
             <video id = "webcam_view">

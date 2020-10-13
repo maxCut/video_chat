@@ -1,8 +1,8 @@
 function join_table(name, table_id)
 {
-    console.log("joining room");
-    getApiToken(name).then(function(result)
+    console.log("joining table: " + table_id);
+    getTableApiToken(name).then(function(result)
     {
-        connectToRoom(table_id,result);
+        connectToTable(table_id,result);
     })
 }
