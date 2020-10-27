@@ -3,6 +3,7 @@ const path = require('path');
 const app = express()
 const port = 3000
 
+const { User } = require("twilio-chat");
 const AccessToken = require('twilio').jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const ChatGrant = AccessToken.ChatGrant;
@@ -42,7 +43,6 @@ const token = new AccessToken(
   token.addGrant(chatGrant);
     res.send(token.toJwt());
 });
-
 
 app.get('/table_key_request', function(req,res){
 
