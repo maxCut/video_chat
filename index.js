@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path');
 const app = express()
-const port = 7672
+const port = process.env.PORT || 8080;
 
 const { User } = require("twilio-chat");
 const AccessToken = require('twilio').jwt.AccessToken;
