@@ -18,14 +18,19 @@ app.use(express.static(__dirname + '/src/javascript'));
 app.use(express.static(__dirname + '/src/html'));
 app.use(express.static(__dirname + '/src/styles'));
 app.use(express.static(__dirname + '/src'));
+
+
+app.use(express.static('build'));
+app.use((req, res, next) => {
+  if (req.header('x-forwarded-proto') !== 'https') {
+    res.redirect(`https://${req.header('host')}${req.url}`)
+  } else {
+    next();
+  }
+});
+
 app.get('/', function(req, res) {
-	if (req.secure) {
-                // request was via https, so do no special handling
-    		res.sendFile(path.join(__dirname + '/src/index.html'));
-        } else {
-                // request was via http, so redirect to https
-                res.redirect('https://' + req.headers.host + req.url);
-        }
+  res.sendFile(path.join(__dirname + '/src/index.html'));
 });
 
 app.get('/room_key_request', function(req,res){
