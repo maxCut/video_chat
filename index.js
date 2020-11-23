@@ -19,7 +19,13 @@ app.use(express.static(__dirname + '/src/html'));
 app.use(express.static(__dirname + '/src/styles'));
 app.use(express.static(__dirname + '/src'));
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/src/index.html'));
+	if (req.secure) {
+                // request was via https, so do no special handling
+    		res.sendFile(path.join(__dirname + '/src/index.html'));
+        } else {
+                // request was via http, so redirect to https
+                res.redirect('https://' + req.headers.host + req.url);
+        }
 });
 
 app.get('/room_key_request', function(req,res){
