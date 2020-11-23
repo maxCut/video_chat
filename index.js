@@ -13,6 +13,9 @@ const twilioAccountSid = 'AC103588916d08b9990e1cc0c54b7c4390';
 const twilioApiKey = 'SK6ee93af114d26ad34adbaf3ea4df910b';
 const twilioApiSecret = 'o9mGQyv8pgX6nbNWeB5DIHE8WhJJfwCG';
 const serviceSid = 'IS44d90fe6773b46ab8fb07ae515f6d72e';
+import sslRedirect from 'heroku-ssl-redirect';
+
+app.use(sslRedirect);
 
 app.use(express.static(__dirname + '/src/javascript'));
 app.use(express.static(__dirname + '/src/html'));

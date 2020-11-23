@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
+    "heroku-ssl-redirect": "^0.1.1",
     "path": "^0.12.7",
     "twilio": "^3.49.1",
     "twilio-chat": "^4.0.0",
