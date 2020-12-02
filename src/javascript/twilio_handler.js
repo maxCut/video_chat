@@ -71,13 +71,18 @@ function participantConnected(participant,room) {
 
 function participantDisconnected(participant) {
   console.log('Participant "%s" disconnected', participant.identity);
+  var element = document.getElementById(participant.sid)
+  element.parentElement.removeChild(element)
 }
 
 function trackSubscribed(div, track) {
 	console.log("track sub");
     div.appendChild(track.attach());
     var placeholder = document.getElementById("placeholder");
-    placeholder.parentNode.removeChild(placeholder);
+    if(placeholder!=null)
+    {
+      placeholder.parentNode.removeChild(placeholder);      
+    }
   }
   
   function trackUnsubscribed(track) {
